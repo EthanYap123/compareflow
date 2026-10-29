@@ -1,0 +1,37 @@
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Java / Spring Boot (api/)
+target/
+build/
+.gradle/
+*.class
+*.log
+
+# Node / React (web/)
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Terraform (infra/)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# Test output
+playwright-report/
+test-results/
