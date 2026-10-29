@@ -4,7 +4,7 @@ Compare supplier quotes and get a purchase approved, with every number traced ba
 
 CompareFlow is a web app for small Singapore businesses (clinics, F&B outlets, small contractors) that buy supplies from several vendors. Instead of retyping quotes into a spreadsheet, a buyer clicks values in the quote itself. Each value stays linked to the spot it came from, the maths is checked (line totals, subtotals, 9% GST), and the approval is recorded in an audit log that can't be edited.
 
-> **Status:** Phase 1 (Planning). No application code yet.
+> **Status:** Phase 1 (Planning). No application code yet. See the [project plan](docs/planning/project-plan.md).
 
 ## How it works
 
@@ -44,8 +44,10 @@ docs/    Plans, requirements, design, ADRs and test reports
 
 - **Frontend:** React, TypeScript, PDF.js
 - **Backend:** Java, Spring Boot, PostgreSQL, Tesseract OCR
-- **Infrastructure:** Docker, AWS (CloudFront, S3, EC2, RDS, SES, Secrets Manager), Terraform
-- **CI/CD:** GitHub Actions
+- **Infrastructure:** Docker, Caddy, Oracle Cloud Always Free (VMs, Object Storage, Email Delivery, Vault), Terraform
+- **CI/CD:** GitHub Actions, GitHub Container Registry
+
+Hosting costs nothing: every service runs on a free tier. See [ADR-0002](docs/adr/0002-host-on-oracle-cloud-always-free.md).
 
 ## Data
 
