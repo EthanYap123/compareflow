@@ -23,7 +23,7 @@ Small businesses compare supplier quotes by retyping them into Excel, then appro
 
 **What we learned so far.** One interview with a clinic operations manager at SP shaped the product. Fully automatic AI extraction was rejected because every value still had to be checked by hand. The lesson for this version: people need to **trust** each number, so every value must link back to where it came from in the original quote.
 
-**Not yet proven.** How much time is lost per week, and how often errors happen, are assumptions until the Phase 2 interviews and the Phase 5 timed tests measure them.
+**Not yet proven.** How much time is lost per week, and how often errors happen, remain assumptions. Phase 2 used desk research instead of new interviews, and public sources don't measure either one. See the [market research](../requirements/market-research.md).
 
 ## Goals and success measures
 
@@ -53,13 +53,14 @@ The MVP covers the full path from request to approved supplier; exports and invo
 | **Must** | Split-screen workspace: quote on the left, table on the right, click-to-fill |
 | **Must** | Every filled value links back to its spot in the quote |
 | **Must** | Map each supplier's line items to the requested items |
-| **Must** | Maths checks: line total, subtotal, GST |
+| **Must** | Maths checks: line total, subtotal, GST treatment |
 | **Must** | Unit and currency conversion (kg/tons, USD/SGD) to a common unit price |
-| **Must** | Comparison view: per-item and total landed cost (incl. delivery and GST) |
-| **Must** | Approval with policy rules (e.g. 3 quotes above S$1,000; reason if not cheapest) |
+| **Must** | Comparison view: per-item and total landed cost, on the buyer's GST basis |
+| **Must** | Approval with configurable rules (e.g. 3 quotes above S$1,000; reason if not cheapest) |
 | **Must** | Audit log that cannot be edited |
 | **Should** | AI suggestions for values, which the user must confirm |
 | **Should** | Paste email text as a quote |
+| **Should** | Record a quote with no file (phone or in person) |
 | **Should** | Weighted score (price, lead time, warranty, payment terms) |
 | **Should** | Email notifications for approvals |
 | **Should** | PDF summary of the decision |
@@ -117,7 +118,7 @@ The biggest risks are time (one person, during a semester) and the hard parts of
 | R1 | Schoolwork and exams squeeze build time | High | High | Must-haves first; cut Should/Could before slipping the release date; 2-week sprints show slippage early |
 | R2 | OCR on scanned quotes is unreliable | Medium | Medium | Click-to-fill still works on OCR text; manual entry fallback; test set includes poor scans |
 | R3 | Matching line items across suppliers is harder than expected | Medium | High | Start with manual mapping (drag item to request line); add auto-suggest only after it works |
-| R4 | Not enough interviewees or testers | Medium | High | Ask early (SP clinic contact, past F&B employers, family businesses); classmates as backup testers |
+| R4 | User needs are unverified, and there may be too few testers | High | High | Label assumptions clearly; decide who tests before Phase 3; never claim results that were not measured |
 | R5 | Free-tier limits or terms change, or a charge appears | Low | Medium | Always Free-only account, never upgraded; budget alert at US$1; limits checked again before Phase 6; Terraform makes moving to another host quick |
 | R6 | Commercially sensitive data leaks between companies | Low | High | Company ID enforced on every query; automated tests try cross-company access; only fake quotes in demos |
 | R7 | New stack (Spring Boot, Terraform) slows progress | Medium | Medium | Small spike in Week 4 to prove the stack; tutorials before Sprint 1 |
