@@ -2,7 +2,7 @@
 
 | Item | Detail |
 | --- | --- |
-| Version | 0.1 (draft for review) |
+| Version | 0.3 (goals changed to checks that need no testers) |
 | Date | 29 October 2026 |
 | Origin | Concept first pitched by a team of four SP students for the SP Small Project Fund, July 2026 (not funded) |
 | This version | Rebuilt and extended by Ethan Yap as an independent project |
@@ -27,14 +27,16 @@ Small businesses compare supplier quotes by retyping them into Excel, then appro
 
 ## Goals and success measures
 
-The project succeeds if real testers compare quotes faster and more accurately than in Excel, and the app runs live in the cloud at no hosting cost, with automated tests and security checks. Targets below are set now and checked in Phase 5.
+The project succeeds if the app gives correct, traceable comparisons on a fake quote set and runs live in the cloud at no hosting cost, with automated tests and security checks. No real users test it, so these targets show that it works as specified, not that people use it faster than Excel. See [ADR-0003](../adr/0003-replace-user-testing-with-scenario-tests.md).
 
 | Goal | Measure | Target | Checked in |
 | --- | --- | --- | --- |
-| Faster comparison | Median time to compare 3 quotes, CompareFlow vs Excel | At least 50% faster | Phase 5 timed test, 5-8 testers |
-| Fewer errors | Wrong values in the final comparison table | Fewer than in Excel, and every seeded maths error flagged | Phase 5 timed test |
-| Trust | Testers who agree "I trust these numbers" (1-5 scale) | Average 4 or higher | Phase 5 survey |
-| Easy to use | System Usability Scale score | 70 or higher | Phase 5 survey |
+| Correct comparison | Cheapest supplier and landed cost in each fake-quote scenario, against a hand-worked answer | 3 of 3 scenarios correct | Phase 5 scenario test |
+| Errors caught | Seeded maths, GST and unit traps in the fake quotes that the app flags | 100% | Phase 5 scenario test |
+| Traceable values | Filled values with a saved source or a "manual" mark | 100% | Automated test |
+| No retyping | Values typed by hand to fill the text-PDF scenario | 0 | Playwright scenario test |
+| OCR accuracy | Prices, quantities and totals read correctly from clean fake scans; poor scans are reported separately | 90% or higher, confirmed in the Week 4 spike | Phase 5 test report |
+| Easy to use | Review against Nielsen's 10 usability heuristics (self-review, not user testing) | No major issue open at release | Phase 5 test report |
 | Quality | Automated tests passing in CI on every merge | 100% pass; core logic 80%+ line coverage | Phase 5 test report |
 | Secure | High or critical findings open at release | 0 | CodeQL, ZAP, Trivy reports |
 | Live | Production URL with a demo account | Up and monitored | Phase 6 |
@@ -90,7 +92,7 @@ gantt
     Sprint 2 (US-04 to US-07)   :s2, after s1, 14d
     Sprint 3 (US-08 to US-12)   :s3, after s2, 14d
     section Ship
-    5. Testing + usability study :t, after s3, 14d
+    5. Testing + scenario tests  :t, after s3, 14d
     6. Deployment (v1.0.0)       :d, after t, 7d
     7. Maintenance (v1.1.0)      :m, after d, 14d
 ```
@@ -103,7 +105,7 @@ gantt
 | 6–7 | 30 Nov – 13 Dec | Sprint 1 |
 | 8–9 | 14 – 27 Dec | Sprint 2 |
 | 10–11 | 28 Dec 2026 – 10 Jan 2027 | Sprint 3 |
-| 12–13 | 11 – 24 Jan 2027 | Testing and usability study |
+| 12–13 | 11 – 24 Jan 2027 | Testing and scenario tests |
 | 14 | 25 – 31 Jan 2027 | Deployment, v1.0.0 |
 | 15–16 | 1 – 14 Feb 2027 | Maintenance, v1.1.0, retrospective |
 
@@ -118,7 +120,7 @@ The biggest risks are time (one person, during a semester) and the hard parts of
 | R1 | Schoolwork and exams squeeze build time | High | High | Must-haves first; cut Should/Could before slipping the release date; 2-week sprints show slippage early |
 | R2 | OCR on scanned quotes is unreliable | Medium | Medium | Click-to-fill still works on OCR text; manual entry fallback; test set includes poor scans |
 | R3 | Matching line items across suppliers is harder than expected | Medium | High | Start with manual mapping (drag item to request line); add auto-suggest only after it works |
-| R4 | User needs are unverified, and there may be too few testers | High | High | Label assumptions clearly; decide who tests before Phase 3; never claim results that were not measured |
+| R4 | User needs stay unverified because no real users are interviewed or test the app | High | High | Label assumptions clearly; measure only what can be checked without users; never claim results that were not measured |
 | R5 | Free-tier limits or terms change, or a charge appears | Low | Medium | Always Free-only account, never upgraded; budget alert at US$1; limits checked again before Phase 6; Terraform makes moving to another host quick |
 | R6 | Commercially sensitive data leaks between companies | Low | High | Company ID enforced on every query; automated tests try cross-company access; only fake quotes in demos |
 | R7 | New stack (Spring Boot, Terraform) slows progress | Medium | Medium | Small spike in Week 4 to prove the stack; tutorials before Sprint 1 |
@@ -127,7 +129,7 @@ The biggest risks are time (one person, during a semester) and the hard parts of
 
 ## Cost estimate and feasibility
 
-Hosting costs US$0: every service runs on a free tier, so the only spending is small thank-yous for testers. Limits were checked on 29 Oct 2026 against the providers' pages and are checked again before Phase 6. See [ADR-0002](../adr/0002-host-on-oracle-cloud-always-free.md) for why.
+Hosting costs US$0: every service runs on a free tier, so nothing needs to be spent. Limits were checked on 29 Oct 2026 against the providers' pages and are checked again before Phase 6. See [ADR-0002](../adr/0002-host-on-oracle-cloud-always-free.md) for why.
 
 | Item | Choice | Free limit | Cost |
 | --- | --- | --- | --- |
@@ -141,7 +143,6 @@ Hosting costs US$0: every service runs on a free tier, so the only spending is s
 | Monitoring | OCI Monitoring and Notifications, UptimeRobot, Sentry | Free plans | US$0 |
 | OCR | Tesseract | Open source | US$0 |
 | Design | Figma (education plan) | Free | US$0 |
-| Tester incentives | Kopi or snacks, not vouchers | | Under S$50 total |
 
 **Running total:** US$0 a month. Oracle asks for a card to verify the account, but an Always Free-only account is not charged unless it is upgraded, and a budget alert at US$1 catches any slip. The two VMs use the whole free compute allowance, so there is no room for a third environment.
 
