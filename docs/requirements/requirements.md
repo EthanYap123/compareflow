@@ -1,11 +1,11 @@
 # Requirements
 
-CompareFlow v0.2 has 15 user stories, 27 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
+CompareFlow v0.3 has 15 user stories, 27 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
 
 | Item | Detail |
 | --- | --- |
-| Version | 0.2 |
-| Date | 4 November 2026 |
+| Version | 0.3 |
+| Date | 5 November 2026 |
 | Basis | Desk research plus one pitch interview |
 
 ## Stakeholders
@@ -97,7 +97,7 @@ Every quality target has a number and a way to test it.
 | NFR-06 | Privacy (PDPA) | Collect only name, email and company for users; anonymise a user's name and email within 30 days of a valid request or once no longer needed, while keeping audit entries | Data review + anonymisation test |
 | NFR-07 | Reliability | Database backed up daily; restore tested once before release | Restore drill on staging |
 | NFR-08 | Availability | Production up 99% during the 4-week testing and demo period | Uptime monitor report |
-| NFR-09 | Usability | A new tester completes a 3-quote comparison without help in under 10 minutes; SUS score of 70+ | Phase 5 usability test |
+| NFR-09 | Usability | The full request-to-approval flow passes as a scripted test; a review against Nielsen's 10 usability heuristics leaves no major issue open | Playwright scenario test + written self-review |
 | NFR-10 | Accessibility | No serious or critical axe issues; usable by keyboard | axe in CI + manual keyboard check |
 | NFR-11 | Compatibility | Works on current Chrome, Edge and Safari; approval screen works at 375 px width | Playwright on three browsers + phone viewport |
 | NFR-12 | Maintainability | All merges through pull requests with CI passing; core logic 80%+ line coverage | GitHub branch rules + coverage report |
@@ -128,12 +128,12 @@ Every quality target has a number and a way to test it.
 | How many approver levels? | One for the MVP | Target firms are small, and one level keeps the rules simple |
 | Which exchange-rate source? | Prefill from a free reference rate, allow an override, save what was used | The official USD series ended in 2015, and a saved rate keeps past decisions from changing |
 | Is S$1,000 and 3 quotes a fixed rule? | No, both are company settings | Thresholds vary widely between organisations |
+| Who tests the app? | No outside testers; scenario tests and a heuristic self-review instead | See [ADR-0003](../adr/0003-replace-user-testing-with-scenario-tests.md) |
 
 ## Open questions
 
 - [ ] Are the original pitch teammates okay with a solo version, and how do they want to be credited?
 - [ ] Is OCR good enough on poor scans? (Week 4 spike)
-- [ ] Who tests the prototype in Phase 3 and the app in Phase 5, now that no interview group exists? NFR-09 and the speed and trust goals depend on real testers and can't be claimed without them.
 
 ## Changes from v0.1
 
@@ -148,3 +148,9 @@ Every quality target has a number and a way to test it.
 | US-15, FR-26 | New Should-have for quotes with no file | Finding 4 |
 | US-12, NFR-06, FR-27 | Anonymise instead of delete | Finding 7 |
 | US-08, FR-14 | Prefilled, overridable, saved exchange rate | Finding 10 |
+
+## Changes from v0.2
+
+| Item | Change | Reason |
+| --- | --- | --- |
+| NFR-09 | Scripted flow and heuristic self-review replace timed tester sessions and the SUS score | No real users test the app |
