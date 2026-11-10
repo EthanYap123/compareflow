@@ -124,7 +124,7 @@ The biggest risks are time (one person, during a semester) and the hard parts of
 | R5 | Free-tier limits or terms change, or a charge appears | Low | Medium | Always Free-only account, never upgraded; budget alert at US$1; limits checked again before Phase 6; Terraform makes moving to another host quick |
 | R6 | Commercially sensitive data leaks between companies | Low | High | Company ID enforced on every query; automated tests try cross-company access; only fake quotes in demos |
 | R7 | New stack (Spring Boot, Terraform) slows progress | Medium | Medium | Small spike in Week 4 to prove the stack; tutorials before Sprint 1 |
-| R8 | Original teammates object to a solo version | Low | Medium | Ask them before building; credit them on the portfolio and README |
+| R8 | Original teammates object to a solo version | Low | Medium | Closed 10 Nov 2026: the teammates agreed to a solo version, run as an individual project |
 | R9 | Oracle has no free ARM capacity in Singapore, or reclaims a VM it sees as idle | Medium | Medium | Create both VMs in the Week 4 spike and retry other availability domains; real use and uptime checks keep them above the idle line; Terraform rebuilds a VM and nightly dumps restore its data |
 
 ## Cost estimate and feasibility
@@ -153,4 +153,4 @@ Sources: [Oracle Always Free resources](https://docs.oracle.com/en-us/iaas/Conte
 ## Phase 1 exit checklist
 
 - [x] Problem statement, goals, scope, timeline, risks and cost estimate (v0.1)
-- [ ] OK from the original pitch team for a solo version, and agreed credit
+- [x] OK from the original pitch team for a solo version (agreed 10 Nov 2026; run as an individual project)

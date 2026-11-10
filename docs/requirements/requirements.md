@@ -132,7 +132,7 @@ Every quality target has a number and a way to test it.
 
 ## Open questions
 
-- [ ] Are the original pitch teammates okay with a solo version, and how do they want to be credited?
+- [x] Are the original pitch teammates okay with a solo version, and how do they want to be credited? Yes, agreed on 10 Nov 2026; it runs as an individual project.
 - [ ] Is OCR good enough on poor scans? (Week 4 spike)
 
 ## Changes from v0.1
