@@ -27,7 +27,7 @@ The project runs through a full software development life cycle over 16 weeks.
 | 2. Requirements | 2–3 | Market research, proto-personas, user stories, functional and non-functional requirements |
 | 3. Design | 4–5 | Architecture, data model, OpenAPI spec, UI prototypes, threat model, test quotes |
 | 4. Development | 6–11 | Three two-week sprints |
-| 5. Testing | 6–13 | Unit, integration, end-to-end, load, security and scenario testing |
+| 5. Testing | 12–13 | Unit, integration, end-to-end, load, security and scenario testing |
 | 6. Deployment | 14 | Terraform staging and production, gated release pipeline |
 | 7. Maintenance | 15–16 | Monitoring, incident reviews, v1.1.0, retrospective |
 
@@ -36,7 +36,7 @@ The project runs through a full software development life cycle over 16 weeks.
 ```
 api/     Spring Boot REST API (Java)
 web/     React + TypeScript single-page app
-infra/   Terraform for AWS
+infra/   Terraform for Oracle Cloud
 docs/    Plans, requirements, design, ADRs and test reports
 ```
 
