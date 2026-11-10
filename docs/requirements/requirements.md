@@ -1,12 +1,13 @@
 # Requirements
 
-CompareFlow v0.3 has 15 user stories, 27 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
+CompareFlow v1.0 has 18 user stories, 32 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
 
 | Item | Detail |
 | --- | --- |
-| Version | 0.3 |
-| Date | 5 November 2026 |
-| Basis | Desk research plus one pitch interview |
+| Version | 1.0 (baseline) |
+| Date | 10 November 2026 |
+| Status | Signed off |
+| Basis | Desk research (two rounds) plus one pitch interview |
 
 ## Stakeholders
 
@@ -29,25 +30,28 @@ These are fictional and built from assumptions. They guide design, but they are 
 
 ## User stories
 
-Twelve Must stories cover the MVP; three Should stories follow if time allows. Acceptance criteria become test cases in Phase 5.
+Twelve Must stories cover the MVP; six Should stories follow if time allows. Acceptance criteria become test cases in Phase 5.
 
 | ID | As a... | I want to... | So that... | Acceptance criteria | Priority |
 | --- | --- | --- | --- | --- | --- |
 | US-01 | Admin | set up my company and invite users with roles | the right people can request and approve | Invite by email; role is requester, approver or admin; a user only ever sees their own company's data | Must |
-| US-02 | Requester | create a purchase request listing items, quantities and units | every quote is compared against the same list | Add, edit, remove items; a request cannot be compared with fewer than 1 quote | Must |
+| US-02 | Requester | create a purchase request listing items, quantities and units | every quote is compared against the same list | Add, edit, remove items; a request needs at least 1 quote before it can be compared | Must |
 | US-03 | Requester | upload quotes as PDF, image or Excel | I can use whatever the supplier sent | PDF, PNG, JPG, XLSX up to 10 MB; other types rejected with a clear message; file shown within 3 s | Must |
-| US-04 | Requester | click a value in the quote to fill a table cell | I never retype numbers | Clicking text fills the selected cell; works on scanned files after OCR; typing by hand is still possible | Must |
-| US-05 | Requester or approver | click any filled value and see where it came from | I can trust the number without rechecking | The source spot is highlighted on the quote; hand-typed values are marked "manual" | Must |
+| US-04 | Requester | click a value in the quote to fill a table cell | I never retype numbers | Clicking text fills the selected cell; works on scanned files after OCR and on cells of an Excel sheet; typing by hand is still possible | Must |
+| US-05 | Requester or approver | click any filled value and see where it came from | I can trust the number without rechecking | The source spot is highlighted on the quote (the place on the page, the cell in the sheet, or the words in pasted text); hand-typed values are marked "manual" | Must |
 | US-06 | Requester | map each supplier's lines to my requested items | items with different names are compared fairly | Drag or pick a request item per line; unmapped lines are listed; one line can map to only one item | Must |
 | US-07 | Requester | be warned when a quote's maths is wrong | I catch supplier and typing errors | Each quote is set to 9% added, 9% included, 0% zero-rated or no GST charged. Flags when qty x unit price differs from the line total by more than S$0.01, when lines do not add to the subtotal, or when GST matches neither the item-by-item nor the subtotal method. A total within S$0.05 that is rounded to the nearest 5 cents shows a note, not an error | Must |
 | US-08 | Requester | see prices in the same unit and currency | I can tell the real unit price | Converts kg/g/tons and bags (with a set bag weight). Foreign currency uses a prefilled daily reference rate that can be overridden; the rate, date and source stay on the quote | Must |
 | US-09 | Requester | see the total landed cost per supplier | the cheapest-looking quote doesn't fool me | Items, delivery and GST shown per supplier, per item and in total. A GST-registered company ranks on cost before GST; others rank on cost with GST; the basis is on screen; cheapest marked | Must |
 | US-10 | Requester | send a recommendation for approval with a reason | my manager knows why | Cannot send if the company's rules are not met, with the failed rule named; a reason is required if not the cheapest | Must |
-| US-11 | Approver | approve or reject from one screen, including on my phone | decisions are quick and recorded | Sees all quotes, the recommendation and the reason; approve or reject with a comment; works at 375 px width. Requesters cannot approve their own request unless an admin allows it, and each such approval is flagged in the audit log | Must |
-| US-12 | Admin or auditor | view an audit log of every request | anyone can see who did what and why | Every create, edit, send, approve and reject is logged with user and time; entries cannot be edited or deleted; anonymising a user leaves the entries in place | Must |
+| US-11 | Approver | approve or reject from one screen, including on my phone | decisions are quick and recorded | Sees all quotes, the recommendation and the reason; approve, reject or send back for changes with a comment; a request sent back can be edited and resubmitted, which starts a new approval round; works at 375 px width. Requesters cannot approve their own request unless an admin allows it, and each such approval is flagged in the audit log | Must |
+| US-12 | Admin or auditor | view an audit log of every request | anyone can see who did what and why | Every create, edit, send, send-back, approve and reject is logged with user and time, and so are admin changes to rules, roles and settings; entries cannot be edited or deleted, and any tampering is detected; anonymising a user leaves the entries in place | Must |
 | US-13 | Requester | get AI-suggested values that I confirm | filling is even faster | Suggestions shown in a different colour; none count until confirmed; each still links to its source | Should |
 | US-14 | Approver | get an email when something needs my approval | I don't miss it | Email within 1 minute, with a link to the approval screen | Should |
 | US-15 | Requester | record a quote I got by phone or in person | it still counts in the comparison | Supplier, values and a note can be entered with no file; every value is marked "manual"; the approver sees that it has no file | Should |
+| US-16 | Requester | paste a quote that came as email or message text | quotes typed into a message still count | Pasted text is saved as the quote; clicking words fills a cell, and each value links to its place in the text | Should |
+| US-17 | Requester or approver | rank quotes by a weighted score as well as cost | lead time, warranty and payment terms count too | Off by default; an admin sets weights for price, lead time, warranty and payment terms; the score is shown beside landed cost, never in place of it | Should |
+| US-18 | Approver or auditor | download a PDF summary of the decision | I have a record outside the app | Shows the request, each quote's landed cost, the recommendation, the reason and the approval trail; available once a request is approved or rejected | Should |
 
 ## Functional requirements
 
@@ -63,7 +67,7 @@ Each requirement gets at least one automated or manual test in Phase 5.
 | FR-06 | Store uploaded files privately and serve them only through short-lived links | US-03 |
 | FR-07 | Extract the text layer from text PDFs and run OCR on scans and images | US-03, US-04 |
 | FR-08 | Fill the selected table cell with the clicked text, parsing numbers and currency symbols | US-04 |
-| FR-09 | Save the source (file, page, position) of every filled value, or mark it as manual | US-05 |
+| FR-09 | Save the source of every filled value (file, page and position; file, sheet and cell; or pasted text and character range), or mark it as manual | US-05 |
 | FR-10 | Highlight a value's source on the quote when the value is selected | US-05 |
 | FR-11 | Let users map each quote line to one request item and list unmapped lines | US-06 |
 | FR-12 | Check line totals and subtotals to S$0.01, and check GST against the quote's treatment using both the item-by-item and subtotal methods; note 5-cent rounding of the total instead of flagging it | US-07 |
@@ -73,8 +77,8 @@ Each requirement gets at least one automated or manual test in Phase 5.
 | FR-16 | Let an admin set approval rules: the minimum number of quotes above an amount they choose, and a reason required if not cheapest | US-10 |
 | FR-17 | Block sending for approval until the rules are met, and say which rule failed | US-10 |
 | FR-18 | Let an approver approve or reject with a comment, locking the request afterwards | US-11 |
-| FR-19 | Record every create, edit, send, approve and reject event with user and time | US-12 |
-| FR-20 | Never allow audit entries to be changed or deleted, including by admins | US-12 |
+| FR-19 | Record every create, edit, send, send-back, approve and reject event, and every admin change to approval rules, user roles, the self-approval setting and user anonymisation, with user, time and what changed | US-12 |
+| FR-20 | Never allow audit entries to be changed or deleted, including by admins, and detect any entry that has been altered or removed | US-12 |
 | FR-21 | Show AI-suggested values as unconfirmed until a user confirms each one | US-13 |
 | FR-22 | Email approvers when a request is sent to them | US-14 |
 | FR-23 | Record each quote's GST treatment: 9% added, 9% included, 0% zero-rated or no GST charged | US-07 |
@@ -82,6 +86,11 @@ Each requirement gets at least one automated or manual test in Phase 5.
 | FR-25 | Block users from approving their own request unless an admin allows it, and flag each such approval in the audit log | US-11 |
 | FR-26 | Let a requester record a quote with no file, with every value marked manual and the missing file shown to the approver | US-15 |
 | FR-27 | Let an admin anonymise a user's name and email while keeping that user's audit entries | US-12 |
+| FR-28 | Show an XLSX quote as a grid of its sheets and cells that can be clicked to fill values, without assuming a fixed layout | US-03, US-04 |
+| FR-29 | Let an approver send a request back for changes with a comment; the requester can edit and resubmit it, which starts a new approval round and keeps every earlier round in the audit log | US-11 |
+| FR-30 | Let a requester paste text as a quote and fill values by clicking words in it | US-16 |
+| FR-31 | Let an admin turn on a weighted score with weights for price, lead time, warranty and payment terms, shown beside landed cost | US-17 |
+| FR-32 | Generate a PDF summary of a decided request: quotes, landed costs, recommendation, reason and approval trail | US-18 |
 
 ## Non-functional requirements
 
@@ -154,3 +163,27 @@ Every quality target has a number and a way to test it.
 | Item | Change | Reason |
 | --- | --- | --- |
 | NFR-09 | Scripted flow and heuristic self-review replace timed tester sessions and the SUS score | No real users test the app |
+
+## Changes from v0.3
+
+These changes come from the requirements review on 10 November 2026 and round 2 of the [market research](market-research.md).
+
+| Item | Change | Reason |
+| --- | --- | --- |
+| US-04, US-05, FR-09, FR-28 | Excel quotes shown as a clickable grid; sources saved by sheet and cell | XLSX was accepted but had no way to fill or trace values. Findings 12 and 13 |
+| US-11, FR-29 | Approver can send a request back for changes; resubmitting starts a new round | Nothing said what happens after a reject. Finding 16 |
+| US-12, FR-19, FR-20 | Admin changes are logged, and tampering with entries is detected | Finding 17 |
+| US-16, FR-30 | New Should-have: paste email or message text as a quote | In the plan's scope but had no story. Finding 11 |
+| US-17, FR-31 | New Should-have: optional weighted score beside landed cost | In the plan's scope but had no story. Finding 14 |
+| US-18, FR-32 | New Should-have: PDF summary of the decision | In the plan's scope but had no story. Finding 15 |
+| US-02 | Clearer wording for the minimum of 1 quote | The old wording was unclear |
+| Version | Baselined as v1.0 | Finding 18 |
+
+## Sign-off
+
+Version 1.0 is the requirements baseline for the design and build. After sign-off, any change to a user story, FR or NFR gets a row in a new change table with its reason, and the version goes up (1.1, 1.2, ...).
+
+| Item | Detail |
+| --- | --- |
+| Signed off by | Ethan Yap |
+| Date | 10 November 2026 |
