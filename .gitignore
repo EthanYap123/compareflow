@@ -35,3 +35,7 @@ crash.log
 # Test output
 playwright-report/
 test-results/
+
+# Python (tools/)
+.venv/
+__pycache__/
