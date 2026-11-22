@@ -4,9 +4,9 @@ CompareFlow stores everything in one PostgreSQL database. A **company** owns its
 
 | Item | Detail |
 | --- | --- |
-| Version | 1.0 |
-| Date | 14 November 2026 |
-| Based on | [Requirements v1.0](../requirements/requirements.md), [Architecture](architecture.md) |
+| Version | 1.1 (pack size replaces bag weight) |
+| Date | 22 November 2026 |
+| Based on | [Requirements v1.1](../requirements/requirements.md), [Architecture](architecture.md) |
 
 ## Entity relationship diagram
 
@@ -132,7 +132,8 @@ erDiagram
         text description
         numeric quantity
         text unit
-        numeric bag_weight_kg
+        numeric pack_size
+        text pack_unit
         numeric unit_price
         numeric line_total
     }
@@ -213,7 +214,7 @@ Every table also has `created_at` and, where rows can change, `updated_at`. All 
 | `quote` | One supplier's offer for a request: GST treatment, currency and the exchange rate used, delivery fee, terms. `source_type` is file, pasted_text or no_file | FR-14, FR-23, FR-26 |
 | `quote_document` | The uploaded file (stored in Object Storage under `object_key`) or the pasted text, plus extraction status | FR-05, FR-06, FR-07, FR-30 |
 | `document_page` | The word map for one PDF page or one sheet: each word or cell with its location | FR-07, FR-10, FR-28 |
-| `quote_line` | One line on a quote. `request_item_id` links it to the item it is compared against; empty means unmapped | FR-11, FR-13 |
+| `quote_line` | One line on a quote. `request_item_id` links it to the item it is compared against; empty means unmapped. For a line priced per pack, `pack_size` and `pack_unit` say what one pack holds (50 kg, 100 pc) | FR-11, FR-13 |
 | `field_value` | Every filled value (quantity, unit price, line total, subtotal, GST, total, delivery fee) and where it came from | FR-08, FR-09, FR-21 |
 | `check_result` | The latest result of each maths or GST check: pass, note or flag | FR-12 |
 | `approval_round` | One send for approval and its outcome. A resubmit after "send back" adds a new round | FR-17, FR-18, FR-25, FR-29 |
