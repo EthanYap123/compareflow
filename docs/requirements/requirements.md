@@ -1,12 +1,12 @@
 # Requirements
 
-CompareFlow v1.0 has 18 user stories, 32 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
+CompareFlow v1.1 has 18 user stories, 32 functional requirements and 13 non-functional requirements. They draw on the [market research](market-research.md) and the one interview from the 2026 pitch. No new user interviews were run, so anything about user behaviour is labelled as an assumption.
 
 | Item | Detail |
 | --- | --- |
-| Version | 1.0 (baseline) |
-| Date | 10 November 2026 |
-| Status | Signed off |
+| Version | 1.1 |
+| Date | 22 November 2026 |
+| Status | v1.0 baseline signed off; v1.1 change approved |
 | Basis | Desk research (two rounds) plus one pitch interview |
 
 ## Stakeholders
@@ -41,7 +41,7 @@ Twelve Must stories cover the MVP; six Should stories follow if time allows. Acc
 | US-05 | Requester or approver | click any filled value and see where it came from | I can trust the number without rechecking | The source spot is highlighted on the quote (the place on the page, the cell in the sheet, or the words in pasted text); hand-typed values are marked "manual" | Must |
 | US-06 | Requester | map each supplier's lines to my requested items | items with different names are compared fairly | Drag or pick a request item per line; unmapped lines are listed; one line can map to only one item | Must |
 | US-07 | Requester | be warned when a quote's maths is wrong | I catch supplier and typing errors | Each quote is set to 9% added, 9% included, 0% zero-rated or no GST charged. Flags when qty x unit price differs from the line total by more than S$0.01, when lines do not add to the subtotal, or when GST matches neither the item-by-item nor the subtotal method. A total within S$0.05 that is rounded to the nearest 5 cents shows a note, not an error | Must |
-| US-08 | Requester | see prices in the same unit and currency | I can tell the real unit price | Converts kg/g/tons and bags (with a set bag weight). Foreign currency uses a prefilled daily reference rate that can be overridden; the rate, date and source stay on the quote | Must |
+| US-08 | Requester | see prices in the same unit and currency | I can tell the real unit price | Converts kg, g and tons, and packs such as bags, boxes or cartons using a set weight or count per pack (for example a 50 kg bag or a box of 100). Foreign currency uses a prefilled daily reference rate that can be overridden; the rate, date and source stay on the quote | Must |
 | US-09 | Requester | see the total landed cost per supplier | the cheapest-looking quote doesn't fool me | Items, delivery and GST shown per supplier, per item and in total. A GST-registered company ranks on cost before GST; others rank on cost with GST; the basis is on screen; cheapest marked | Must |
 | US-10 | Requester | send a recommendation for approval with a reason | my manager knows why | Cannot send if the company's rules are not met, with the failed rule named; a reason is required if not the cheapest | Must |
 | US-11 | Approver | approve or reject from one screen, including on my phone | decisions are quick and recorded | Sees all quotes, the recommendation and the reason; approve, reject or send back for changes with a comment; a request sent back can be edited and resubmitted, which starts a new approval round; works at 375 px width. Requesters cannot approve their own request unless an admin allows it, and each such approval is flagged in the audit log | Must |
@@ -71,7 +71,7 @@ Each requirement gets at least one automated or manual test in Phase 5.
 | FR-10 | Highlight a value's source on the quote when the value is selected | US-05 |
 | FR-11 | Let users map each quote line to one request item and list unmapped lines | US-06 |
 | FR-12 | Check line totals and subtotals to S$0.01, and check GST against the quote's treatment using both the item-by-item and subtotal methods; note 5-cent rounding of the total instead of flagging it | US-07 |
-| FR-13 | Convert between kg, g and tons, and from bags using a set weight per bag | US-08 |
+| FR-13 | Convert between kg, g and tons, and from packs (bags, boxes, cartons) to their base unit using a set weight or count per pack | US-08 |
 | FR-14 | Convert foreign currency to SGD using a prefilled daily reference rate that a user can override, saving the rate, date and source with the quote | US-08 |
 | FR-15 | Show per-item unit prices and total landed cost (items + delivery + GST) for each supplier, ranked on the company's GST basis | US-09 |
 | FR-16 | Let an admin set approval rules: the minimum number of quotes above an amount they choose, and a reason required if not cheapest | US-10 |
@@ -187,3 +187,9 @@ Version 1.0 is the requirements baseline for the design and build. After sign-of
 | --- | --- |
 | Signed off by | Ethan Yap |
 | Date | 10 November 2026 |
+
+## Changes after sign-off
+
+| Version | Date | Item | Change | Reason | Approved by |
+| --- | --- | --- | --- | --- | --- |
+| 1.1 | 22 November 2026 | US-08, FR-13 | Unit conversion covers any pack with a set weight or count (bags, boxes, cartons), not only bags | Building the fake quote set showed that clinic supplies are priced per box of 100 and per box of 50, which v1.0 did not cover | Ethan Yap |
