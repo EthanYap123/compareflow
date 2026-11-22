@@ -6,6 +6,7 @@ The expected result for each scenario, worked out step by step. The Phase 5 scen
 | --- | --- |
 | Version | 1.0 |
 | Date | 22 November 2026 |
+| Checked against the files | 22 November 2026: every value re-read from the quote files (text layer, sheet cells, email text, and the photo and scan by eye) and every check, conversion, landed cost and ranking recomputed. No differences found |
 | Checked by hand | _not yet_ |
 
 ## Rules used
