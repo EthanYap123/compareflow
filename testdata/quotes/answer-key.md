@@ -1,13 +1,13 @@
 # Answer key
 
-The expected result for each scenario, worked out step by step. The Phase 5 scenario tests compare the app's output with these numbers (also in [answer-key.json](answer-key.json)). Every step must be checked by hand against the quote files before the key is used.
+The expected result for each scenario, worked out step by step. The Phase 5 scenario tests compare the app's output with these numbers (also in [answer-key.json](answer-key.json)). Every step was checked against the quote files before the key was accepted. If a quote changes, the key must be worked out and checked again.
 
 | Item | Detail |
 | --- | --- |
 | Version | 1.0 |
 | Date | 22 November 2026 |
 | Checked against the files | 22 November 2026: every value re-read from the quote files (text layer, sheet cells, email text, and the photo and scan by eye) and every check, conversion, landed cost and ranking recomputed. No differences found |
-| Checked by hand | _not yet_ |
+| Accepted by | Ethan Yap, 22 November 2026, on the strength of the check against the files |
 
 ## Rules used
 
